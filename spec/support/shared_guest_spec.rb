@@ -1,6 +1,6 @@
 require 'set'
 
-shared_examples "a guest list page" do
+shared_examples "a guest list page" do |guest1, guest2, guest3|
   it "shows the guest" do
     page.should have_content guest1.first_name
   end
