@@ -26,11 +26,11 @@ describe "An Invitation" do
         end
 
         it "shows a yes button" do
-          within(:css, @guest_class) { within(:css, @question_class) { page.should have_button 'Yes' } }
+          within(:css, @guest_class) { within(:css, @question_class) { page.should have_text 'Yes' } }
         end
 
         it "shows a no button" do
-          within(:css, @guest_class) { within(:css, @question_class) { page.should have_button 'No' } }
+          within(:css, @guest_class) { within(:css, @question_class) { page.should have_text 'No' } }
         end
       end
 
@@ -42,7 +42,7 @@ describe "An Invitation" do
         end
 
         it "shows a text field" do
-          within(:css, @guest_class) { within(:css, @question_class) { page.should have_field "question_#{@question2.id}" } }
+          within(:css, @guest_class) { within(:css, @question_class) { page.should have_field "answer_#{@question2.id}" } }
         end
       end
 
@@ -50,11 +50,11 @@ describe "An Invitation" do
         before { @question_class = ".question_#{@question3.id}" }
 
         it "shows the question" do
-          within(:css, @guest_class) { within(:css, @question_class) { page.should have_text @question2.label } }
+          within(:css, @guest_class) { within(:css, @question_class) { page.should have_text @question3.label } }
         end
 
         it "shows a text area" do
-          within(:css, @guest_class) { within(:css, @question_class) { page.should have_field "question_#{@question3.id}" } }
+          within(:css, @guest_class) { within(:css, @question_class) { page.should have_field "answer_#{@question3.id}" } }
         end
       end
     end
@@ -70,11 +70,11 @@ describe "An Invitation" do
         end
 
         it "shows a yes button" do
-          within(:css, @guest_class) { within(:css, @question_class) { page.should have_button 'Yes' } }
+          within(:css, @guest_class) { within(:css, @question_class) { page.should have_text 'Yes' } }
         end
 
         it "shows a no button" do
-          within(:css, @guest_class) { within(:css, @question_class) { page.should have_button 'No' } }
+          within(:css, @guest_class) { within(:css, @question_class) { page.should have_text 'No' } }
         end
       end
 
@@ -86,7 +86,7 @@ describe "An Invitation" do
         end
 
         it "shows a text field" do
-          within(:css, @guest_class) { within(:css, @question_class) { page.should have_field "question_#{@question2.id}" } }
+          within(:css, @guest_class) { within(:css, @question_class) { page.should have_field "answer_#{@question2.id}" } }
         end
       end
 
@@ -94,11 +94,11 @@ describe "An Invitation" do
         before { @question_class = ".question_#{@question3.id}" }
 
         it "shows the question" do
-          within(:css, @guest_class) { within(:css, @question_class) { page.should have_text @question2.label } }
+          within(:css, @guest_class) { within(:css, @question_class) { page.should have_text @question3.label } }
         end
 
         it "shows a text area" do
-          within(:css, @guest_class) { within(:css, @question_class) { page.should have_field "question_#{@question3.id}" } }
+          within(:css, @guest_class) { within(:css, @question_class) { page.should have_field "answer_#{@question3.id}" } }
         end
       end
     end   
