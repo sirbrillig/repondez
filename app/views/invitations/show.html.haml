@@ -1,0 +1,6 @@
+.invitation
+  - @guests.each do |guest|
+    .guest{class: "guest_#{guest.id}"}
+      %h3= "#{guest.first_name} #{guest.last_name}"
+      - @questions.each do |question|
+        .question= question.label

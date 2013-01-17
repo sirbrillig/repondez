@@ -1,6 +1,7 @@
 class InvitationsController < ApplicationController
-  def view
+  def show
     invitation = Invitation.find(params[:id])
     @guests = invitation.guests
+    @questions = Question.all
   end
 end
