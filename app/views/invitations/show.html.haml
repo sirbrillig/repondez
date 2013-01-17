@@ -3,4 +3,4 @@
     .guest{class: "guest_#{guest.id}"}
       %h3= "#{guest.first_name} #{guest.last_name}"
       - @questions.each do |question|
-        .question= question.label
+        .question{class: "question_#{question.id}"}= question.label
