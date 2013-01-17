@@ -1,5 +1,9 @@
-class GuestController < ApplicationController
+class GuestsController < ApplicationController
+  def index
+  end
+
   def find
+    @guest = Guest.new
   end
 
   def view

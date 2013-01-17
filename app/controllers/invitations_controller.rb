@@ -1,4 +1,4 @@
-class InvitationController < ApplicationController
+class InvitationsController < ApplicationController
   def view
     invitation = Invitation.find(params[:id])
     @guests = invitation.guests

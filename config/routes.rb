@@ -1,10 +1,12 @@
-Respondez::Application.routes.draw do
+Repondez::Application.routes.draw do
   get "invitation/view"
 
-  get "guest/find"
+  resources :guests do
+    get "find", on: :collection
+    get "view", on: :member
+    get "update", on: :member
+  end
 
-  get "guest/view"
-
-  get "guest/update"
+  root to: 'guests#find'
 
 end
