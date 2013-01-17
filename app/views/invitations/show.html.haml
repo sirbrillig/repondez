@@ -5,11 +5,10 @@
       = simple_form_for :question, url: guest_url(guest) do |f|
         - @questions.each do |question|
           .question{class: "question_#{question.id}"}
-            = f.input question.label
             - case question.field_type
             - when 'boolean'
-              = f.collection_radio_buttons :options, [[true, 'Yes'], [false, 'No']], :first, :last
+              = f.input question.label, as: :radio_buttons
             - when 'string'
-              = f.input "answer_#{question.id}", input_html: { id: "answer_#{question.id}" }
+              = f.input question.label, input_html: { id: "answer_#{question.id}" }
             - when 'text'
-              = f.input :content, input_html: { id: "answer_#{question.id}" }
+              = f.input question.label, input_html: { id: "answer_#{question.id}" }, as: :text
