@@ -1,8 +1,8 @@
 .invitation
-  - @guests.each do |guest|
-    .guest{class: "guest_#{guest.id}"}
-      %h3= "#{guest.first_name} #{guest.last_name}"
-      = simple_form_for :question, url: guest_url(guest) do |f|
+  = simple_form_for :question, url: invitation_url(@invitation) do |f|
+    - @guests.each do |guest|
+      .guest{class: "guest_#{guest.id}"}
+        %h3= "#{guest.first_name} #{guest.last_name}"
         - @questions.each do |question|
           .question{class: "question_#{question.id}"}
             - case question.field_type
@@ -12,3 +12,4 @@
               = f.input question.label, input_html: { id: "answer_#{question.id}" }
             - when 'text'
               = f.input question.label, input_html: { id: "answer_#{question.id}" }, as: :text
+    = f.submit "Save"

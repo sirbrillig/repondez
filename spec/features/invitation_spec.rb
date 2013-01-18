@@ -59,7 +59,7 @@ describe "An Invitation" do
       end
     end
 
-     context "for the second guest" do
+    context "for the second guest" do
       before { @guest_class = ".guest_#{@guest2.id}" }
 
       context "for the first question" do
@@ -101,6 +101,27 @@ describe "An Invitation" do
           within(:css, @guest_class) { within(:css, @question_class) { page.should have_field "answer_#{@question3.id}" } }
         end
       end
-    end   
+    end
+
+    context "when the form is filled" do
+      before do
+        @guest_class = ".guest_#{@guest1.id}"
+        within(:css, @guest_class) do 
+          within(:css, ".question_#{@question1.id}") { choose "Yes" }
+          fill_in "answer_#{@question2.id}", with: "radical"
+          fill_in "answer_#{@question3.id}", with: "This is a good form."
+        end
+      end
+
+      context "and submitted" do
+        before do
+          click_on('Save')
+        end
+
+        it "the form is no longer displayed" do
+          page.should_not have_text @question1.label
+        end
+      end
+    end
   end
 end
