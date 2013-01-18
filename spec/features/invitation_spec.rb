@@ -124,6 +124,10 @@ describe "An Invitation" do
         context "and re-visiting the form" do
           before { visit invitation_url(@invite1) }
 
+          it "the guest's first answer is updated" do
+            within(:css, @guest_class) { within(:css, ".question_#{@question1.id}") { page.should have_checked_field "Yes" } }
+          end
+
           it "the guest's second answer is updated" do
             page.should have_field "answer_#{@question2.id}", with: "radical"
           end
