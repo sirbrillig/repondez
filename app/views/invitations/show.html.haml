@@ -5,11 +5,13 @@
         %h3= "#{guest.first_name} #{guest.last_name}"
         - @questions.each do |question|
           .question{class: "question_#{question.id}"}
+            - answer = question.answers.where(guest_id: guest.id).first
+            - answer_text = (answer ? answer.answer_text : nil)
             - case question.field_type
             - when 'boolean'
-              = f.input question.label, as: :radio_buttons
+              = f.input question.label, as: :radio_buttons, input_html: { name: "answer[#{guest.id}][#{question.id}]" }, checked: answer_text
             - when 'string'
-              = f.input question.label, input_html: { id: "answer_#{question.id}", name: "answer[#{guest.id}][#{question.id}]" }
+              = f.input question.label, input_html: { id: "answer_#{question.id}", name: "answer[#{guest.id}][#{question.id}]", value: answer_text }
             - when 'text'
-              = f.input question.label, input_html: { id: "answer_#{question.id}", name: "answer[#{guest.id}][#{question.id}]" }, as: :text
+              = f.input question.label, input_html: { id: "answer_#{question.id}", name: "answer[#{guest.id}][#{question.id}]", value: answer_text }, as: :text
     = f.submit "Save"
