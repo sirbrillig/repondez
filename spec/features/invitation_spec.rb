@@ -7,7 +7,6 @@ describe "An Invitation" do
       @guest2 = FactoryGirl.create :guest2
       @invite1 = FactoryGirl.create :invitation
       @invite1.guests << @guest1 << @guest2
-      @invite1.save
       @question1 = FactoryGirl.create :boolean_question
       @question2 = FactoryGirl.create :string_question
       @question3 = FactoryGirl.create :text_question
@@ -120,6 +119,14 @@ describe "An Invitation" do
 
         it "the form is no longer displayed" do
           page.should_not have_text @question1.label
+        end
+
+        context "and re-visiting the form" do
+          before { visit invitation_url(@invite1) }
+
+          it "the guest's second answer is updated" do
+            page.should have_field "answer_#{@question2.id}", with: "radical"
+          end
         end
       end
     end

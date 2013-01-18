@@ -15,16 +15,6 @@ class GuestsController < ApplicationController
     redirect_to invitation_url(guest.invitation)
   end
 
-  def update
-    guest = find_by_first_name_and_last_name(params[:guest][:first_name], params[:guest][:last_name])
-    guest.update_attributes(params[:guest])
-    if guest.invitation
-      redirect_to invitation_url(guest.invitation)
-    else
-      redirect_to view_guest_url(guest.invitation)
-    end
-  end
-
   private
 
   def find_by_first_name_and_last_name(first_name, last_name)

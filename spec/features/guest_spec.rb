@@ -38,7 +38,6 @@ describe "A Guest" do
         @guest3 = FactoryGirl.create :guest3
         @invite1 = FactoryGirl.create :invitation
         @invite1.guests << @guest1 << @guest2
-        @invite1.save
       end
 
       context "when the name is entered exactly" do

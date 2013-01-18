@@ -1,5 +1,5 @@
 .invitation
-  = simple_form_for :question, url: invitation_url(@invitation) do |f|
+  = simple_form_for :question, url: invitation_url(@invitation), method: :put do |f|
     - @guests.each do |guest|
       .guest{class: "guest_#{guest.id}"}
         %h3= "#{guest.first_name} #{guest.last_name}"
@@ -9,7 +9,7 @@
             - when 'boolean'
               = f.input question.label, as: :radio_buttons
             - when 'string'
-              = f.input question.label, input_html: { id: "answer_#{question.id}" }
+              = f.input question.label, input_html: { id: "answer_#{question.id}", name: "answer[#{guest.id}][#{question.id}]" }
             - when 'text'
-              = f.input question.label, input_html: { id: "answer_#{question.id}" }, as: :text
+              = f.input question.label, input_html: { id: "answer_#{question.id}", name: "answer[#{guest.id}][#{question.id}]" }, as: :text
     = f.submit "Save"
