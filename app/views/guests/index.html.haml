@@ -3,5 +3,6 @@
 - @guests.each do |guest|
   = simple_form_for :guest, url: guest_url(guest), method: :put, html: { class: 'form-horizontal' } do |f|
     .guest{class: "guest_#{guest.id}"}
-      = f.input :invitation_id, label: guest.full_name, collection: @invitations, label_method: :id, value_method: :id, input_html: { class: "guest_#{guest.id}_invitation", id: "guest_#{guest.id}_invitation" }, selected: guest.invitation_id, hint: 'Choose an Invitation', required: false
+      = f.label guest.full_name, required: false
+      = f.input :invitation_id, label: 'Invitation', collection: @invitations, label_method: :guest_list, value_method: :id, input_html: { class: "guest_#{guest.id}_invitation", id: "guest_#{guest.id}_invitation" }, selected: guest.invitation_id, hint: 'Choose an Invitation', required: false
       = f.submit 'Save'
