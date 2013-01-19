@@ -56,7 +56,7 @@ describe "For an administrator" do
     end
 
     it "does not show guests with no invitation in the dropdown of other guests" do
-      page.should_not have_content @guest2.first_name
+      page.should_not have_content @guest3.first_name
     end
 
     context "when the form is filled" do
@@ -67,8 +67,9 @@ describe "For an administrator" do
 
       context "with another guest (invitation) selected" do
         before do
-          select @guest1.full_name, from: 'guest[invitation]'
+          select @guest1.full_name, from: 'guest[invitation_id]'
           click_on 'Save'
+          @new_guest = Guest.find_by_first_name_and_last_name(@guest3.first_name, @guest3.last_name)
         end
 
         it "does not create a new invitation" do
@@ -76,13 +77,16 @@ describe "For an administrator" do
         end
 
         it "adds the new guest to the invitation of the other guest" do
-          @guest1.invitation.id.should eq @invite1.id
+          @new_guest.invitation.id.should eq @invite1.id
+        end
+
+        it "shows the guest with the invitation in the list page" do
+          page.should have_select "guest_#{@new_guest.id}_invitation", selected: @invite1.id.to_s
         end
       end
 
       context "without another invitation selected" do
         before do
-          select 'None', from: 'guest[invitation]'
           click_on 'Save'
         end
         
@@ -91,7 +95,8 @@ describe "For an administrator" do
         end
         
         it "adds the new guest to the invitation" do
-          @guest1.invitation.id.should eq Invitation.last.id
+          new_guest = Guest.find_by_first_name_and_last_name(@guest3.first_name, @guest3.last_name)
+          new_guest.invitation.id.should eq Invitation.last.id
         end
       end
     end

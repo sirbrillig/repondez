@@ -1,4 +1,24 @@
 class GuestsController < ApplicationController
+  def index
+    @guests = Guest.all
+    @invitations = Invitation.all
+  end
+
+  def new
+    @guest = Guest.new
+    @guests = Guest.where('invitation_id IS NOT NULL')
+  end
+
+  def create
+    @guest = Guest.new(params[:guest])
+    @guest.invitation = Invitation.create if params[:guest][:invitation_id].empty?
+    if @guest.save
+      redirect_to guests_url, notice: 'Guest added!'
+    else
+      render action: 'new'
+    end
+  end
+
   def find
     if request.post?
       guest = find_by_first_name_and_last_name(params[:guest][:first_name], params[:guest][:last_name])
