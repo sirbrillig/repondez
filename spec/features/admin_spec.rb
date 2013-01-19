@@ -47,7 +47,7 @@ describe "For an administrator" do
       @guest3 = FactoryGirl.build :guest3
       @invite1 = FactoryGirl.create :invitation
       @invite1.guests << @guest1
-      @old_size = Invitation.size
+      @old_size = Invitation.count
       visit new_guest_url
     end
 
@@ -72,7 +72,7 @@ describe "For an administrator" do
         end
 
         it "does not create a new invitation" do
-          Invitation.size.should eq @old_size
+          Invitation.count.should eq @old_size
         end
 
         it "adds the new guest to the invitation of the other guest" do
@@ -87,7 +87,7 @@ describe "For an administrator" do
         end
         
         it "creates a new invitation" do
-          Invitation.size.should eq (@old_size + 1)
+          Invitation.count.should eq (@old_size + 1)
         end
         
         it "adds the new guest to the invitation" do
