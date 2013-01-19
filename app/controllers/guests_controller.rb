@@ -19,6 +19,15 @@ class GuestsController < ApplicationController
     end
   end
 
+  def update
+    @guest = Guest.find(params[:id])
+    if @guest.update_attributes(params[:guest])
+      redirect_to guests_url, notice: 'Invitation selected!'
+    else
+      render action: 'index'
+    end
+  end
+
   def find
     if request.post?
       guest = find_by_first_name_and_last_name(params[:guest][:first_name], params[:guest][:last_name])
