@@ -1,4 +1,6 @@
 class GuestsController < ApplicationController
+  before_filter :authenticate_user!, except: [:find, :view]
+
   def index
     @guests = Guest.all
     @invitations = Invitation.all

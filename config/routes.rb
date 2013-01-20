@@ -1,4 +1,6 @@
 Repondez::Application.routes.draw do
+  devise_for :users
+
   resources :invitations
 
   resources :guests do
