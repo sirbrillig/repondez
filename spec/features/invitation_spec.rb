@@ -10,6 +10,7 @@ describe "An Invitation" do
       @question1 = FactoryGirl.create :boolean_question
       @question2 = FactoryGirl.create :string_question
       @question3 = FactoryGirl.create :text_question
+      @question4 = FactoryGirl.create :boolean_question, options: 'Please|Ouch'
 
       visit invitation_path(@invite1)
     end
@@ -30,6 +31,22 @@ describe "An Invitation" do
 
         it "shows a no button" do
           within(:css, @guest_class) { within(:css, @question_class) { page.should have_text 'No' } }
+        end
+      end
+
+      context "for the fourth question" do
+        before { @question_class = ".question_#{@question4.id}" }
+
+        it "shows the question" do
+          within(:css, @guest_class) { within(:css, @question_class) { page.should have_text @question4.label } }
+        end
+
+        it "shows the custom 'yes' button" do
+          within(:css, @guest_class) { within(:css, @question_class) { page.should have_text 'Please' } }
+        end
+
+        it "shows the custom 'no' button" do
+          within(:css, @guest_class) { within(:css, @question_class) { page.should have_text 'Ouch' } }
         end
       end
 

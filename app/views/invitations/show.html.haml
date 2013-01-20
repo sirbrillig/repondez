@@ -9,9 +9,12 @@
             - answer_text = (answer ? answer.answer_text : nil)
             - case question.field_type
             - when 'boolean'
-              = f.input question.label, as: :radio_buttons, input_html: { name: "answer[#{guest.id}][#{question.id}]" }, checked: answer_text
+              - if question.options
+                = f.input question.label, as: :radio_buttons, collection: question.options.split('|'), input_html: { name: "answer[#{guest.id}][#{question.id}]" }, checked: answer_text
+              - else
+                = f.input question.label, as: :radio_buttons, input_html: { name: "answer[#{guest.id}][#{question.id}]" }, checked: answer_text
             - when 'string'
-              = f.input question.label, input_html: { id: "answer_#{question.id}", name: "answer[#{guest.id}][#{question.id}]", value: answer_text }
+              = f.input question.label, input_html: { id: "answer_#{question.id}", name: "answer[#{guest.id}][#{question.id}]", value: answer_text }, required: false
             - when 'text'
-              = f.input question.label, input_html: { id: "answer_#{question.id}", name: "answer[#{guest.id}][#{question.id}]", value: answer_text }, as: :text
+              = f.input question.label, input_html: { id: "answer_#{question.id}", name: "answer[#{guest.id}][#{question.id}]", value: answer_text }, as: :text, required: false
     = f.submit "Save"

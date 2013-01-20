@@ -30,13 +30,14 @@ describe "For an administrator" do
     context "when an invitation is selected for a guest" do
       before do
         within(:css, ".guest_#{@guest2.id}") do
-          select @invite1.id, from: "guest_#{@guest2.id}_invitation"
+          select @invite1.guest_list, from: "guest_#{@guest2.id}_invitation"
           click_on 'Save'
+          @invite1.reload
         end
       end
 
       it "displays the guest as having that invitation" do
-        page.should have_select "guest_#{@guest1.id}_invitation", selected: @invite1.id.to_s
+        page.should have_select "guest_#{@guest1.id}_invitation", selected: @invite1.guest_list
       end
     end
 
@@ -83,7 +84,7 @@ describe "For an administrator" do
         end
 
         it "shows the guest with the invitation in the list page" do
-          page.should have_select "guest_#{@new_guest.id}_invitation", selected: @invite1.id.to_s
+          page.should have_select "guest_#{@new_guest.id}_invitation", selected: @invite1.guest_list
         end
       end
 

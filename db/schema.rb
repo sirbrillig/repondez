@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130118045945) do
+ActiveRecord::Schema.define(:version => 20130120184625) do
 
   create_table "answers", :force => true do |t|
     t.integer  "guest_id"
@@ -39,6 +39,7 @@ ActiveRecord::Schema.define(:version => 20130118045945) do
     t.string   "field_type"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.string   "options"
   end
 
 end
