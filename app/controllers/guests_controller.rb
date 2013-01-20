@@ -37,7 +37,7 @@ class GuestsController < ApplicationController
         session[:guest_id] = guest.id
         redirect_to invitation_url(guest.invitation)
       else
-        flash[:error] = "No guest was found by that name."
+        flash[:error] = "Sorry, I didn't find a guest by that name. #{view_context.mail_to('wedding@foolord.com', 'Send us an email', encode: 'javascript')} and we'll see what went wrong.".html_safe
       end
     end
   end

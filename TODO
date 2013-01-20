@@ -1,8 +1,5 @@
 * Allow ordering of Questions
 * Question admin section
 * Disallow signups
-* Add email address for "name not found"
 * Add support for multiple first/last names per Guest
 * strip apostrophes, etc, from names when searching
-* At top of invitation, add instructions.
-* At top of invitation, add list of guests on that invitation.

@@ -1,8 +1,9 @@
-%h1 Hello,
-%h3 Please tell me your name so I can look up your invitation.
+%h1 Greetings and Well Met,
+%h4 This is the RSVP site for Payton and Meg's wedding. 
+%h4 Please tell me your name so I can look up your invitation.
 
 .form
   = simple_form_for :guest, url: find_guests_url do |f|
-    = f.input :first_name
-    = f.input :last_name
+    = f.input :first_name, required: false
+    = f.input :last_name, required: false
     = f.button :submit, 'Find'
