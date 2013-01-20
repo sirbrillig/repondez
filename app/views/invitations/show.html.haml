@@ -1,3 +1,7 @@
+.instructions
+  %h1 Hi there, #{@guests.first.first_name.capitalize},
+  %p Below you'll see a section for yourself and each other person on your invitation. Fill the sections for as many people as you are responsible for and click 'Save' when you're done. You can always change it later.
+
 .invitation
   = simple_form_for :question, url: invitation_url(@invitation), method: :put do |f|
     - @guests.each do |guest|
@@ -17,4 +21,4 @@
               = f.input question.label, input_html: { id: "answer_#{question.id}", name: "answer[#{guest.id}][#{question.id}]", value: answer_text }, required: false
             - when 'text'
               = f.input question.label, input_html: { id: "answer_#{question.id}", name: "answer[#{guest.id}][#{question.id}]", value: answer_text }, as: :text, required: false
-    = f.submit "Save"
+    = f.submit "Save", class: 'btn-success'

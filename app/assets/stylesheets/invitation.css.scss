@@ -1,3 +1,15 @@
 // Place all the styles related to the invitation controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.instructions {
+  width: 500px;
+  border-bottom: 1px dashed #aaa;
+  margin: 4px;
+}
+
+.invitation .guest {
+  width: 500px;
+  border-bottom: 1px dashed #aaa;
+  margin: 4px;
+}
