@@ -1,0 +1,4 @@
+* Boolean options with labels for Question, ie: "Yes, I can't wait" rather than "Yes"
+* Allow ordering of Questions
+* Question admin section
+* Default "dietary restrictions" db:setup.
