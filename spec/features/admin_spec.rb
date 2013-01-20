@@ -1,13 +1,26 @@
 require 'spec_helper.rb'
 
-describe "For an administrator" do
+describe "The guest list page" do
+  context "without logging-in" do
+    before { visit guests_url }
+    it "displays a login page" do
+      page.should have_field 'user[email]'
+    end
+  end
 
-  context "The guest list page" do
+  context "when logged-in" do
     before do
+      @user = FactoryGirl.create :user
       @guest1 = FactoryGirl.create :guest1
       @guest2 = FactoryGirl.create :guest2
       @invite1 = FactoryGirl.create :invitation
       @invite1.guests << @guest1
+
+      visit guests_url
+      fill_in 'user[email]', with: @user.email
+      fill_in 'user[password]', with: @user.password
+      click_on 'Sign in'
+
       visit guests_url
     end
 
@@ -42,15 +55,31 @@ describe "For an administrator" do
     end
 
   end
+end
 
-  context "The new guest page" do
+describe "The new guest page" do
+  context "without logging-in" do
+    before { visit new_guest_url }
+    it "displays a login page" do
+      page.should have_field 'user[email]'
+    end
+  end
+
+  context "when logged-in" do
     before do
+      @user = FactoryGirl.create :user
       @guest1 = FactoryGirl.create :guest1
       @guest2 = FactoryGirl.create :guest2
       @guest3 = FactoryGirl.build :guest3
       @invite1 = FactoryGirl.create :invitation
       @invite1.guests << @guest1
       @old_size = Invitation.count
+
+      visit new_guest_url
+      fill_in 'user[email]', with: @user.email
+      fill_in 'user[password]', with: @user.password
+      click_on 'Sign in'
+
       visit new_guest_url
     end
 
