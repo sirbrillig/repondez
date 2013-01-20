@@ -1,6 +1,5 @@
 * Allow ordering of Questions
 * Question admin section
-* Set ordering of guests by who types in their name
 * Disallow signups
 * Add email address for "name not found"
 * Add support for multiple first/last names per Guest

@@ -34,6 +34,7 @@ class GuestsController < ApplicationController
     if request.post?
       guest = find_by_first_name_and_last_name(params[:guest][:first_name], params[:guest][:last_name])
       if guest and guest.invitation
+        session[:guest_id] = guest.id
         redirect_to invitation_url(guest.invitation)
       else
         flash[:error] = "No guest was found by that name."
