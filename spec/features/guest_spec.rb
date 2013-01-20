@@ -59,7 +59,11 @@ describe "A Guest" do
           page.should_not have_content @guest3.first_name
         end
 
-        it "shows the first guest as the one who entered the name"
+        it "shows the first guest as the one who entered the name" do
+          within(:css, ".guest:first-of-type") { page.should have_content @guest1.first_name }
+          # FIXME: not working
+          #page.should have_selector(".guest:first-of-type") { have_content @guest1.first_name }
+        end
       end
 
       context "when the name is entered differently-cased" do
