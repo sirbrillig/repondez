@@ -12,4 +12,4 @@
 #puts 'user: ' << user.name
 
 Question.create(label:'Are you planning to attend?', field_type:'boolean', options:"Yes, I'll be there with bells on!|No thanks, I plan to be stuck in a laundry chute.")
-Question.create(label:'Any dietary restrictions?', field_type:'string')
+Question.create(label:'Any dietary restrictions we should know about?', field_type:'string')

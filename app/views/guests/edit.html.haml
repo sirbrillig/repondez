@@ -1,0 +1,10 @@
+.page-header
+  = link_to guests_path, :class => 'btn' do
+    %i.icon-list-alt
+    Back
+  = link_to @guest, :class => 'btn btn-primary' do
+    %i.icon-info-sign.icon-white
+    Show
+  %h1 Editing guest
+
+= render 'form'

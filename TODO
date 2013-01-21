@@ -1,5 +1,3 @@
 * Allow ordering of Questions
-* Question admin section
-* Disallow signups
 * Add support for multiple first/last names per Guest
 * strip apostrophes, etc, from names when searching

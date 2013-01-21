@@ -2,6 +2,7 @@ class GuestsController < ApplicationController
   before_filter :authenticate_user!, except: [:find, :view]
 
   def index
+    @questions = Question.all
     @guests = Guest.all
     @invitations = Invitation.all
   end
@@ -24,10 +25,25 @@ class GuestsController < ApplicationController
   def update
     @guest = Guest.find(params[:id])
     if @guest.update_attributes(params[:guest])
-      redirect_to guests_url, notice: 'Invitation selected!'
+      redirect_to guests_url, notice: 'Guest updated!'
     else
       render action: 'index'
     end
+  end
+
+  def edit
+    @guest = Guest.find(params[:id])
+    @guests = Guest.where('invitation_id IS NOT NULL')
+  end
+
+  def show
+    @guest = Guest.find(params[:id])
+  end
+
+  def destroy
+    @guest = Guest.find(params[:id])
+    @guest.destroy
+    redirect_to guests_url
   end
 
   def find

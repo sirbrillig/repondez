@@ -1,0 +1,10 @@
+.page-header
+  = link_to questions_path, :class => 'btn' do
+    %i.icon-list-alt
+    Back
+  = link_to @question, :class => 'btn btn-primary' do
+    %i.icon-info-sign.icon-white
+    Show
+  %h1 Editing question
+
+= render 'form'

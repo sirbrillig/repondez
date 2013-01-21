@@ -1,0 +1,22 @@
+.page-header
+  = link_to new_question_path, :class => 'btn btn-primary' do
+    %i.icon-plus.icon-white
+    New Question
+  %h1 Listing questions
+
+%table.table.table-bordered.table-striped
+  %thead
+    %tr
+      %th Label
+      %th Field Type
+      %th Options
+
+  %tbody
+    - @questions.each do |question|
+      %tr
+        %td= question.label
+        %td= question.field_type
+        %td= question.options
+        %td= link_to 'Show', question
+        %td= link_to 'Edit', edit_question_path(question)
+        %td= link_to 'Destroy', question, :confirm => 'Are you sure?', :method => :delete

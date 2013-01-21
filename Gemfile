@@ -8,6 +8,7 @@ group :assets do
 end
 gem 'devise'
 gem 'bootstrap-sass'
+gem 'bootstrap-generators', '~> 2.1'
 gem 'simple_form'
 gem 'jquery-rails'
 gem "thin", ">= 1.5.0"

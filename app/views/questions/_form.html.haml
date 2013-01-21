@@ -1,0 +1,10 @@
+= simple_form_for(@question, :defaults => { :input_html => { :class => 'input-xlarge' } }) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :label
+    = f.input :field_type, hint: "Try 'boolean' or 'string'."
+    = f.input :options, hint: "For boolean, you can use two |-separated values for Yes and No."
+
+  .form-actions
+    = f.button :submit, :class => "btn-primary"

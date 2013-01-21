@@ -1,4 +1,4 @@
-= simple_form_for(@<%= singular_table_name %>) do |f|
+= simple_form_for(@<%= singular_table_name %>, :defaults => { :input_html => { :class => 'input-xlarge' } }) do |f|
   = f.error_notification
 
   .form-inputs
@@ -7,4 +7,4 @@
   <%- end -%>
 
   .form-actions
-    = f.button :submit
+    = f.button :submit, :class => "btn-primary"

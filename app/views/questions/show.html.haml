@@ -1,0 +1,16 @@
+.page-header
+  = link_to questions_path, :class => 'btn' do
+    %i.icon-list-alt
+    Back
+  = link_to edit_question_path(@question), :class => 'btn btn-primary' do
+    %i.icon-pencil.icon-white
+    Edit
+  %h1 Listing questions
+
+%dl
+  %dt Label
+  %dd= @question.label
+  %dt Field Type
+  %dd= @question.field_type
+  %dt Options
+  %dd= @question.options

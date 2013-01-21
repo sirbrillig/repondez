@@ -1,7 +1,7 @@
-%h1 Make a New Guest
+.page-header
+  = link_to guests_path, :class => 'btn' do
+    %i.icon-list-alt
+    Back
+  %h1 New guest
 
-= simple_form_for @guest do |f|
-  = f.input :first_name
-  = f.input :last_name
-  = f.input :invitation_id, collection: @guests, value_method: :invitation_id, label_method: :full_name, prompt: 'New Invitation', hint: 'Choose another guest to group this invitation'
-  = f.submit 'Save'
+= render 'form'

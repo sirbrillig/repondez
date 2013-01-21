@@ -1,8 +1,29 @@
-%h1 Guests
-= link_to 'Make a New Guest', new_guest_url, class: 'btn'
-- @guests.each do |guest|
-  = simple_form_for :guest, url: guest_url(guest), method: :put, html: { class: 'form-horizontal' } do |f|
-    .guest{class: "guest_#{guest.id}"}
-      = f.label guest.full_name, required: false
-      = f.input :invitation_id, label: 'Invitation', collection: @invitations, label_method: :guest_list, value_method: :id, input_html: { class: "guest_#{guest.id}_invitation", id: "guest_#{guest.id}_invitation" }, selected: guest.invitation_id, hint: 'Choose an Invitation', required: false
-      = f.submit 'Save'
+.page-header
+  = link_to new_guest_path, :class => 'btn btn-primary' do
+    %i.icon-plus.icon-white
+    New Guest
+  %h1 Listing Guests
+
+%table.table.table-bordered.table-striped
+  %thead
+    %tr
+      %th Name
+      %th Invitation
+      - @questions.each do |question|
+        %th= question.label
+
+  %tbody
+    - @guests.each do |guest|
+      = simple_form_for :guest, url: guest_url(guest), method: :put, html: { class: 'form-horizontal' } do |f|
+        %tr.guest{class: "guest_#{guest.id}"}
+          %td= guest.full_name
+          %td= f.input :invitation_id, collection: @invitations, label_method: :guest_list, value_method: :id, input_html: { class: "guest_#{guest.id}_invitation", id: "guest_#{guest.id}_invitation" }, selected: guest.invitation_id, required: false
+          - @questions.each do |question|
+            - if answer = guest.answers.where(question_id: question.id).first
+              %td= answer.answer_text
+            - else
+              %td
+          %td= link_to 'Show', guest
+          %td= link_to 'Edit', edit_guest_path(guest)
+          %td= link_to 'Destroy', guest, :confirm => 'Are you sure?', :method => :delete
+          %td= f.submit 'Save'

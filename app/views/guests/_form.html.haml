@@ -1,0 +1,10 @@
+= simple_form_for(@guest, :defaults => { :input_html => { :class => 'input-xlarge' } }) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :first_name
+    = f.input :last_name
+    = f.input :invitation_id, collection: @guests, value_method: :invitation_id, label_method: :full_name, prompt: 'New Invitation', hint: 'Choose another guest to group this invitation'
+
+  .form-actions
+    = f.submit 'Save', :class => "btn-primary"
