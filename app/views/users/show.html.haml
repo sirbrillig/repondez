@@ -1,0 +1,12 @@
+.page-header
+  = link_to users_path, :class => 'btn' do
+    %i.icon-list-alt
+    Back
+  = link_to edit_user_path(@user), :class => 'btn btn-primary' do
+    %i.icon-pencil.icon-white
+    Edit
+  %h1 Listing users
+
+%dl
+  %dt Email
+  %dd= @user.email

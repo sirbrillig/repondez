@@ -8,3 +8,7 @@
   %h1 Listing guests
 
 %dl
+  %dt Name
+  %dd= @guest.full_name
+  - @guest.answers.each do |question|
+    %dd <em>#{answer.question.label}:</em> answer.answer_text

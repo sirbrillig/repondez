@@ -5,7 +5,7 @@ Repondez::Application.routes.draw do
     devise_for :users, controllers: { registrations: "registrations" }
   end
 
-  resources :invitations, :questions
+  resources :invitations, :questions, :users
 
   resources :guests do
     get "find", on: :collection
