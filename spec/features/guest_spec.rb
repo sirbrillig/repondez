@@ -48,7 +48,7 @@ describe "A Guest" do
         end
 
         it "shows the guest" do
-          page.should have_content @guest1.first_name
+          page.should have_content @guest1.full_name
         end
 
         it "shows other guests who are on the same invitation" do
@@ -85,7 +85,7 @@ describe "A Guest" do
         end
 
         it "shows the guest" do
-          page.should have_content @guest1.first_name
+          page.should have_content @guest1.full_name
         end
 
         it "shows other guests who are on the same invitation" do
@@ -94,6 +94,24 @@ describe "A Guest" do
 
         it "does not show guests who are not on the invitation" do
           page.should_not have_content @guest3.first_name
+        end
+      end
+
+      context "when the name has an apostrophe" do
+        before do
+          @guest5 = FactoryGirl.create :guest1, last_name: "O'Hara"
+          @invite1.guests << @guest5
+          fill_in 'guest[first_name]', with: @guest5.first_name
+          fill_in 'guest[last_name]', with: @guest5.last_name
+          click_button 'Find'
+        end
+
+        it "the guest exists" do
+          Guest.find(@guest5.id).full_name.should eq @guest5.full_name
+        end
+
+        it "shows the guest" do
+          page.should have_content @guest5.full_name
         end
       end
     end
