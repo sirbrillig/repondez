@@ -16,7 +16,11 @@ class GuestsController < ApplicationController
     @guest = Guest.new(params[:guest])
     @guest.invitation = Invitation.create if params[:guest][:invitation_id].empty?
     if @guest.save
-      redirect_to guests_url, notice: 'Guest added!'
+      if params[:save_and_add]
+        redirect_to new_guest_url, notice: 'Guest added!'
+      else
+        redirect_to guests_url, notice: 'Guest added!'
+      end
     else
       render action: 'new'
     end
@@ -25,7 +29,11 @@ class GuestsController < ApplicationController
   def update
     @guest = Guest.find(params[:id])
     if @guest.update_attributes(params[:guest])
-      redirect_to guests_url, notice: 'Guest updated!'
+      if params[:save_and_add]
+        redirect_to new_guest_url, notice: 'Guest updated!'
+      else
+        redirect_to guests_url, notice: 'Guest updated!'
+      end
     else
       render action: 'index'
     end
