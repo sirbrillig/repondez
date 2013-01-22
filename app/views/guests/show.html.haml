@@ -10,5 +10,9 @@
 %dl
   %dt Name
   %dd= @guest.full_name
-  - @guest.answers.each do |question|
-    %dd <em>#{answer.question.label}:</em> answer.answer_text
+  %dt Answers
+  - if @guest.answers.empty?
+    %dd None
+  - else
+    - @guest.answers.each do |answer|
+      %dd <em>#{answer.question.label}:</em> #{answer.answer_text}
