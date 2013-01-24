@@ -74,4 +74,5 @@ pickle-email-*.html
 
 # Ignore application configuration
 /config/application.yml
+/config/database.yml
 pw
