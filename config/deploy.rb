@@ -1,0 +1,28 @@
+set :application, "repondez"
+set :environment, "production"
+set :repository,  "git@github.com:sirbrillig/repondez.git"
+
+default_run_options[:pty] = true
+set :use_sudo, false
+set :rvm_type, :system    # :user is the default
+set :rvm_ruby_string, ENV['GEM_HOME'].gsub(/.*\//,"") # Read from local system
+require "rvm/capistrano"
+set :rake, "/home/payton/.rvm/gems/ruby-1.9.3-p286@global/bin/rake"
+
+set :scm, :git
+set :scm_verbose, true
+set :branch, "master"
+set :deploy_via, :remote_cache
+set :deploy_to, "/webapps/#{application}"
+
+role :web, "dwalin.foolord.com"
+role :app, "dwalin.foolord.com"
+role :db, "dwalin.foolord.com", primary: true
+
+namespace :deploy do
+  task :start do ; end
+  task :stop do ; end
+  task :restart, :roles => :app, :except => { :no_release => true } do
+    run "#{try_sudo} touch #{File.join(current_path,'tmp','restart.txt')}"
+  end
+end
