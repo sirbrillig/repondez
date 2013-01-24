@@ -5,8 +5,9 @@ set :repository,  "git@github.com:sirbrillig/repondez.git"
 default_run_options[:pty] = true
 set :use_sudo, false
 set :rvm_type, :system    # :user is the default
-set :rvm_ruby_string, ENV['GEM_HOME'].gsub(/.*\//,"") # Read from local system
+#set :rvm_ruby_string, ENV['GEM_HOME'].gsub(/.*\//,"") # Read from local system
 require "rvm/capistrano"
+require "bundler/capistrano"
 set :rake, "/home/payton/.rvm/gems/ruby-1.9.3-p286@global/bin/rake"
 
 set :scm, :git
@@ -18,6 +19,15 @@ set :deploy_to, "/webapps/#{application}"
 role :web, "dwalin.foolord.com"
 role :app, "dwalin.foolord.com"
 role :db, "dwalin.foolord.com", primary: true
+
+after 'deploy:finalize_update', 'deploy:symlink_db'
+
+namespace :deploy do
+  desc "Symlinks the database.yml"
+  task :symlink_db, :roles => :app do
+    run "ln -nfs #{deploy_to}/shared/config/database.yml #{release_path}/config/database.yml"
+  end
+end
 
 namespace :deploy do
   task :start do ; end
