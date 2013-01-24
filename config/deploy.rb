@@ -20,12 +20,17 @@ role :web, "dwalin.foolord.com"
 role :app, "dwalin.foolord.com"
 role :db, "dwalin.foolord.com", primary: true
 
-after 'deploy:finalize_update', 'deploy:symlink_db'
+after 'deploy:finalize_update', 'deploy:symlink_db', 'deploy:symlink_app'
 
 namespace :deploy do
   desc "Symlinks the database.yml"
   task :symlink_db, :roles => :app do
     run "ln -nfs #{deploy_to}/shared/config/database.yml #{release_path}/config/database.yml"
+  end
+
+  desc "Symlinks the application.yml"
+  task :symlink_app, :roles => :app do
+    run "ln -nfs #{deploy_to}/shared/config/application.yml #{release_path}/config/application.yml"
   end
 end
 
