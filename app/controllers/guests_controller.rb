@@ -65,9 +65,4 @@ class GuestsController < ApplicationController
       end
     end
   end
-
-  def view
-    guest = Guest.find_by_first_name_and_last_name(params[:guest][:first_name], params[:guest][:last_name])
-    redirect_to invitation_url(guest.invitation)
-  end
 end

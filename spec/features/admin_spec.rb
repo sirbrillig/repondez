@@ -100,7 +100,7 @@ describe "The new guest page" do
       context "with another guest (invitation) selected" do
         before do
           select @guest1.full_name, from: 'guest[invitation_id]'
-          click_on 'Save'
+          click_on 'save_guest'
           @new_guest = Guest.find_by_first_name_and_last_name(@guest3.first_name, @guest3.last_name)
         end
 
@@ -119,7 +119,7 @@ describe "The new guest page" do
 
       context "without another invitation selected" do
         before do
-          click_on 'Save'
+          click_on 'save_guest'
         end
         
         it "creates a new invitation" do
