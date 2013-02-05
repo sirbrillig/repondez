@@ -1,0 +1,55 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>JSONP and Rails Demo</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+function fetchInvitationData(id){
+  $.ajax({
+      url: "http://localhost:3000/invitations/" + id + ".js",
+      dataType: "jsonp",
+      type: "GET",
+      processData: false,
+      contentType: "application/json",
+      success: function(data) {
+        var html = [];
+        html.push('<li><em>Invite</em>');
+        $.each(data, function(i) {
+          html.push('<ul>');
+          g = data[i];
+          html.push('<li>Name: ' + g['first_name'] + ' ' + g['last_name']);
+          html.push('<ul>');
+          $.each(g['answers'], function(ii) {
+            var answer = g['answers'][ii];
+            if (answer) {
+              html.push('<li>' + answer['question']['label'] + ': ' + answer['answer_text'] + '</li>');
+            }
+          });
+          html.push('</ul>');
+          html.push('</ul>');
+        });
+        html.push('</li>');
+        $('#invitations').append(html.join(''));
+      }
+    });
+};
+
+function fetchData(){
+  for (i=1; i<=5; i++) {
+    fetchInvitationData(i);
+  }
+};
+</script>
+</head>
+
+<body>
+  <ul id="invitations">
+  </ul>
+</body>
+
+<script type="text/javascript">
+$(document).ready(function(){
+  fetchData();
+});
+</script>
+</html>
