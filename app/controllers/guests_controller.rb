@@ -58,8 +58,7 @@ class GuestsController < ApplicationController
     if request.post?
       guest = Guest.find_by_first_name_and_last_name(params[:guest][:first_name], params[:guest][:last_name])
       if guest and guest.invitation
-        session[:guest_id] = guest.id
-        redirect_to invitation_url(guest.invitation)
+        redirect_to find_invitations_url(first_name: params[:guest][:first_name], last_name: params[:guest][:last_name])
       else
         flash[:error] = "Sorry, I didn't find a guest by that name. #{view_context.mail_to('wedding@foolord.com', 'Send us an email', encode: 'javascript')} and we'll see what went wrong.".html_safe
       end

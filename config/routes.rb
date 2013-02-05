@@ -5,12 +5,15 @@ Repondez::Application.routes.draw do
     devise_for :users, controllers: { registrations: "registrations" }
   end
 
-  resources :invitations, :questions, :users
+  resources :questions, :users
+
+  resources :invitations do
+    get "find", on: :collection
+  end
 
   resources :guests do
     get "find", on: :collection
     post "find", on: :collection
-    get "view", on: :member
   end
 
   match '/admin' => 'guests#index'

@@ -12,7 +12,7 @@ describe "An Invitation" do
       @question3 = FactoryGirl.create :text_question
       @question4 = FactoryGirl.create :boolean_question, options: 'Please|Ouch'
 
-      visit invitation_path(@invite1)
+      visit find_invitations_path(first_name: @guest1.first_name, last_name: @guest1.last_name)
     end
 
     context "for the first guest" do
@@ -139,7 +139,7 @@ describe "An Invitation" do
         end
 
         context "and re-visiting the form" do
-          before { visit invitation_url(@invite1) }
+          before { visit find_invitations_path(first_name: @guest1.first_name, last_name: @guest1.last_name) }
 
           it "the guest's first answer is updated" do
             within(:css, @guest_class) { within(:css, ".question_#{@question1.id}") { page.should have_checked_field "Yes" } }

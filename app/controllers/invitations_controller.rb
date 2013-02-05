@@ -1,23 +1,26 @@
 class InvitationsController < ApplicationController
-  def show
-    @invitation = Invitation.find(params[:id])
+  def find
+    guest = Guest.find_by_first_name_and_last_name(params[:first_name], params[:last_name])
+    if guest and guest.invitation
+      @invitation = guest.invitation
 
-    if @invitation and @invitation.guests and @invitation.guests.size > 0
+      if @invitation and @invitation.guests and @invitation.guests.size > 0
 
-      # If we got here searching for a guest, list that guest first.
-      @guests = @invitation.guests.dup
-      if session[:guest_id] and found_guest = Guest.find(session[:guest_id])
-        @guests.unshift found_guest if @guests.delete found_guest
+        # If we got here searching for a guest, list that guest first.
+        @guests = @invitation.guests.dup
+        @guests.unshift guest if @guests.delete guest
+
+        @questions = Question.all
+
+        respond_to do |format|
+          format.html
+          format.js
+          format.json
+        end
+
+      else
+        not_found
       end
-
-      @questions = Question.all
-
-      respond_to do |format|
-        format.html
-        format.js
-        format.json
-      end
-
     else
       not_found
     end
