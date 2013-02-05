@@ -4,6 +4,6 @@
 
 .form
   = simple_form_for :guest, url: find_guests_url do |f|
-    = f.input :first_name, required: false
+    = f.input :first_name, required: false, autofocus: true
     = f.input :last_name, required: false
     = f.button :submit, 'Find'
