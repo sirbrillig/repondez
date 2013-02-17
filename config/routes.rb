@@ -5,6 +5,8 @@ Repondez::Application.routes.draw do
     devise_for :users, controllers: { registrations: "registrations" }
   end
 
+  resources :tokens, only: [:create, :destroy]
+
   resources :questions, :users
 
   resources :invitations do
