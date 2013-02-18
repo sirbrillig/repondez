@@ -43,6 +43,7 @@ class UsersController < ApplicationController
   # POST /users.json
   def create
     @user = User.new(params[:user])
+    @user.skip_confirmation!
 
     respond_to do |format|
       if @user.save
