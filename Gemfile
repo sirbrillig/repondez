@@ -18,7 +18,8 @@ gem "haml-rails", ">= 0.3.5", :group => :development
 gem "hpricot", ">= 0.8.6", :group => :development
 gem "ruby_parser", ">= 3.1.1", :group => :development
 gem "rspec-rails", ">= 2.11.4", :group => [:development, :test]
-gem "capybara", ">= 2.0.1", :group => [:development, :test]
+gem "xpath", :group => [:development, :test], :git => "git://github.com/jnicklas/xpath.git"
+gem "capybara", ">= 2.0.1", :group => [:development, :test], :git => "git://github.com/sirbrillig/capybara.git", :branch => "have_link_to"
 gem "database_cleaner", ">= 0.9.1", :group => :test
 gem "email_spec", ">= 1.4.0", :group => :test
 gem "factory_girl_rails", ">= 4.1.0", :group => [:development, :test]
