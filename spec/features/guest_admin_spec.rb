@@ -34,7 +34,6 @@ describe "The guest list page" do
 
     it "displays a link to create a new guest" do
       page.should have_link_to new_guest_url
-#       page.should have_link('', href: new_guest_url)
     end
 
     it "displays a selection for each guest to assign an invitation" do
