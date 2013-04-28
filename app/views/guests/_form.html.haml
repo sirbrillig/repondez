@@ -3,7 +3,9 @@
 
   .form-inputs
     = f.input :first_name, autofocus: true
+    = f.input :alias_first_name, label: 'First Name Aliases', hint: 'Comma-separated'
     = f.input :last_name
+    = f.input :alias_last_name, label: 'Last Name Aliases', hint: 'Comma-separated'
     = f.input :invitation_id, collection: @guests, value_method: :invitation_id, label_method: :full_name, prompt: 'New Invitation', hint: 'Choose another guest to group this invitation'
 
   .form-actions
