@@ -97,6 +97,46 @@ describe "A Guest" do
         end
       end
 
+      context "when the name entered is an alias to the last name" do
+        before do
+          fill_in 'guest[last_name]', with: @guest1.alias_last_name.split(',').last
+          fill_in 'guest[first_name]', with: @guest1.first_name
+          click_button 'Find'
+        end
+
+        it "shows the guest" do
+          page.should have_content @guest1.full_name
+        end
+
+        it "shows other guests who are on the same invitation" do
+          page.should have_content @guest2.first_name
+        end
+
+        it "does not show guests who are not on the invitation" do
+          page.should_not have_content @guest3.first_name
+        end
+      end
+
+      context "when the name entered is an alias to the first name" do
+        before do
+          fill_in 'guest[first_name]', with: @guest1.alias_first_name.split(',').first
+          fill_in 'guest[last_name]', with: @guest1.last_name
+          click_button 'Find'
+        end
+
+        it "shows the guest" do
+          page.should have_content @guest1.full_name
+        end
+
+        it "shows other guests who are on the same invitation" do
+          page.should have_content @guest2.first_name
+        end
+
+        it "does not show guests who are not on the invitation" do
+          page.should_not have_content @guest3.first_name
+        end
+      end
+
       context "when the name has an apostrophe" do
         before do
           @guest5 = FactoryGirl.create :guest1, last_name: "O'Hara"
