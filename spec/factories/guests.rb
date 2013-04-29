@@ -3,6 +3,8 @@
 FactoryGirl.define do
   factory :guest1, class: Guest do
     first_name "Dude"
+    alias_first_name "Rock,Slab"
+    alias_last_name "Huge,Barbell"
     last_name "Manguy"
   end
 
