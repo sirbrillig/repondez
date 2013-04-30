@@ -65,7 +65,7 @@ class GuestsController < ApplicationController
       if guest and guest.invitation
         redirect_to find_invitations_url(first_name: params[:guest][:first_name], last_name: params[:guest][:last_name])
       else
-        flash[:error] = "Sorry, I didn't find a guest by that name. #{view_context.mail_to('wedding@foolord.com', 'Send us an email', encode: 'javascript')} and we'll see what went wrong.".html_safe
+        flash[:error] = "Sorry, I didn't find a guest by that name. If your name can be written differently, you could try that, otherwise #{view_context.mail_to('wedding@foolord.com', 'send us an email', encode: 'javascript')} and we'll see what went wrong.".html_safe
       end
     end
   end
