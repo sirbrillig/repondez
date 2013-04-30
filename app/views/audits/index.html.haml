@@ -1,0 +1,24 @@
+.page-header
+  %h1 Answer Changes Log
+
+%table.table.table-bordered.table-striped
+  %thead
+    %tr
+      %th Date
+      %th User
+      %th Action
+      %th Data
+
+  %tbody
+    - @audits.each do |audit|
+      %tr
+        %td= audit.created_at
+        %td= audit.user.email
+        %td= audit.action
+        %td
+          .text-info
+            = audit.audited_changes.first[0]
+          .label old
+          = audit.audited_changes.first[1][0]
+          .label.label-success new
+          = audit.audited_changes.first[1][1]
