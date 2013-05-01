@@ -14,6 +14,7 @@ Repondez::Application.routes.draw do
 
   scope '/admin' do
     resources :users
+    resources :audits
   end
 
   resources :invitations do

@@ -1,0 +1,27 @@
+.page-header
+  %h1 Answer Changes Log
+
+%table.table.table-bordered.table-striped
+  %thead
+    %tr
+      %th Date
+      %th Guest
+      %th Data
+
+  %tbody
+    - @audits.each do |audit|
+      - next unless audit.audited_changes.first[0] == 'answer_text'
+      %tr
+        %td= audit.created_at
+        %td= link_to(audit.associated.full_name, guest_url(audit.associated)) if audit.associated
+        %td
+          .label old
+          - old = audit.audited_changes.first[1][0]
+          - old = '...' if old.blank?
+          = old
+          %i.icon-arrow-right
+          .label.label-success 
+            new
+          - new = audit.audited_changes.first[1][1]
+          - new = '...' if new.blank?
+          = new
