@@ -2,6 +2,7 @@ class Guest < ActiveRecord::Base
   attr_accessible :first_name, :last_name, :invitation_id, :alias_first_name, :alias_last_name
   belongs_to :invitation
   has_many :answers
+  has_associated_audits
 
   def full_name
     "#{first_name} #{last_name}"
