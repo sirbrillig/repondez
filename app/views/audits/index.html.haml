@@ -6,14 +6,17 @@
     %tr
       %th Date
       %th Guest
+      %th Question
       %th Data
 
   %tbody
     - @audits.each do |audit|
       - next unless audit.audited_changes.first[0] == 'answer_text'
+      - next if audit.audited_changes.first[1][0].blank? and audit.audited_changes.first[1][1].blank?
       %tr
         %td= audit.created_at
         %td= link_to(audit.associated.full_name, guest_url(audit.associated)) if audit.associated
+        %td= audit.revision.question.label
         %td
           .label old
           - old = audit.audited_changes.first[1][0]
