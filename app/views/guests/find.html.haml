@@ -6,4 +6,5 @@
   = simple_form_for :guest, url: find_guests_url do |f|
     = f.input :first_name, required: false, autofocus: true
     = f.input :last_name, required: false
-    = f.button :submit, 'Find'
+    .controls
+      = f.button :submit, 'Find Me', class: 'btn-success btn-large'
